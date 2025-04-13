@@ -9,13 +9,13 @@ interface ContractRunnerProps {
 }
 
 const formatResult = (value: any): any => {
-  if (typeof value === 'bigint') {
+  if (typeof value === "bigint") {
     return value.toString();
   }
   if (Array.isArray(value)) {
     return value.map(formatResult);
   }
-  if (typeof value === 'object' && value !== null) {
+  if (typeof value === "object" && value !== null) {
     const formatted: any = {};
     for (const [key, val] of Object.entries(value)) {
       formatted[key] = formatResult(val);
@@ -25,7 +25,11 @@ const formatResult = (value: any): any => {
   return value;
 };
 
-const ContractRunner: FC<ContractRunnerProps> = ({ contract, functions, account }) => {
+const ContractRunner: FC<ContractRunnerProps> = ({
+  contract,
+  functions,
+  account,
+}) => {
   const { removeContract } = useContractStore();
 
   const [expanded, setExpanded] = useState<number | null>(null);
@@ -33,7 +37,11 @@ const ContractRunner: FC<ContractRunnerProps> = ({ contract, functions, account 
 
   const [result, setResult] = useState<any>(null);
 
-  const handleParamChange = (methodName: string, index: number, value: string) => {
+  const handleParamChange = (
+    methodName: string,
+    index: number,
+    value: string,
+  ) => {
     setParams((prev) => ({
       ...prev,
       [methodName]: {
@@ -42,7 +50,6 @@ const ContractRunner: FC<ContractRunnerProps> = ({ contract, functions, account 
       },
     }));
   };
-
 
   const callMethodOnContract = async (method: any, params: any[]) => {
     setResult(null);
@@ -55,7 +62,7 @@ const ContractRunner: FC<ContractRunnerProps> = ({ contract, functions, account 
     if (functionToCall.stateMutability === "view") {
       try {
         const tx = contract.methods[method](...params);
-        const result = await tx.call()
+        const result = await tx.call();
         setResult(result);
       } catch (error) {
         console.error(error);
@@ -112,8 +119,9 @@ const ContractRunner: FC<ContractRunnerProps> = ({ contract, functions, account 
             >
               <span className="font-medium">{func.name}</span>
               <svg
-                className={`w-5 h-5 transform transition-transform ${expanded === index ? "rotate-180" : ""
-                  }`}
+                className={`w-5 h-5 transform transition-transform ${
+                  expanded === index ? "rotate-180" : ""
+                }`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -138,14 +146,22 @@ const ContractRunner: FC<ContractRunnerProps> = ({ contract, functions, account 
                       <input
                         type="text"
                         className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        onChange={(e) => handleParamChange(func.name, paramIndex, e.target.value)}
+                        onChange={(e) =>
+                          handleParamChange(
+                            func.name,
+                            paramIndex,
+                            e.target.value,
+                          )
+                        }
                       />
                     </div>
                   ))}
                   <button
                     className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
                     onClick={() => {
-                      const methodParams = func.inputs.map((_: any, i: number) => params[func.name]?.[i] || "");
+                      const methodParams = func.inputs.map(
+                        (_: any, i: number) => params[func.name]?.[i] || "",
+                      );
                       callMethodOnContract(func.name, methodParams);
                     }}
                   >
@@ -162,7 +178,9 @@ const ContractRunner: FC<ContractRunnerProps> = ({ contract, functions, account 
         <div className="mt-4">
           <h3 className="text-lg font-medium mb-2">Resultado</h3>
           <pre className="bg-gray-100 p-4 rounded-md">
-            {typeof result === 'object' ? JSON.stringify(formatResult(result), null, 2) : result}
+            {typeof result === "object"
+              ? JSON.stringify(formatResult(result), null, 2)
+              : result}
           </pre>
         </div>
       )}

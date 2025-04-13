@@ -36,7 +36,11 @@ const ContractView = () => {
   }
 
   return (
-    <ContractRunner account={account} contract={state.contract} functions={state.functions} />
+    <ContractRunner
+      account={account}
+      contract={state.contract}
+      functions={state.functions}
+    />
   );
 };
 
