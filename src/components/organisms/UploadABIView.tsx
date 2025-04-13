@@ -1,5 +1,3 @@
-import Web3, { Contract } from "web3";
-
 import ContractView from "./ContractView";
 import UploadABIForm from "./UploadABIForm";
 
@@ -12,12 +10,8 @@ function UploadABIView() {
   const handleFileChange = async (abi: any, address: string) => {
     initLoading();
     try {
-      const web3 = new Web3((window as any).ethereum);
-      const contract: Contract<any> = new web3.eth.Contract(abi.abi, address);
-
-      addContract({ abi, address, contract });
+      addContract({ abi, address });
     } catch (error: any) {
-      console.log(error);
       setError(error.message);
     }
   };

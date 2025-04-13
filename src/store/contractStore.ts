@@ -1,9 +1,9 @@
-import { Contract } from "web3";
+//import { Contract } from "web3";
 
 export interface CustomContract {
   abi: any;
   address?: string;
-  contract: Contract<any>;
+  //contract: Contract<any>;
 }
 
 export interface ContractStore {
@@ -17,4 +17,6 @@ export interface ContractStore {
   initLoading: () => void;
   addContract: (contract: any) => void;
   setError: (error: string) => void;
+
+  removeContract: () => void;
 }
