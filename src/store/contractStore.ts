@@ -1,17 +1,20 @@
-export interface Contract {
+import { Contract } from "web3";
+
+export interface CustomContract {
   abi: any;
-  name?: string;
   address?: string;
+  contract: Contract<any>;
 }
 
 export interface ContractStore {
-  contract: Contract | null;
+  account: string | null;
+
+  contract: CustomContract | null;
   loading: boolean;
   error: string | null;
 
+  addAccount: (account: string) => void;
   initLoading: () => void;
   addContract: (contract: any) => void;
   setError: (error: string) => void;
-
-  removeContract: () => void;
 }
