@@ -2,6 +2,7 @@ import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
 import PageLayout from "./PageLayout";
 import HomePage from "../pages/HomaPage";
 import DetailPage from "../pages/DetailPage";
+import AccountValidator from "./AccountValidator";
 
 function App() {
   return (
@@ -10,17 +11,25 @@ function App() {
         <Route
           path="/"
           element={
-            <PageLayout>
-              <HomePage />
-            </PageLayout>
+            <AccountValidator
+              render={() => (
+                <PageLayout>
+                  <HomePage />
+                </PageLayout>
+              )}
+            />
           }
         />
         <Route
           path="/contract/:id"
           element={
-            <PageLayout>
-              <DetailPage />
-            </PageLayout>
+            <AccountValidator
+              render={() => (
+                <PageLayout>
+                  <DetailPage />
+                </PageLayout>
+              )}
+            />
           }
         />
       </Routes>
