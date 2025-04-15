@@ -68,7 +68,18 @@ const ContractRunner: FC<ContractRunnerProps> = ({
       }
       return;
     }
+    if (functionToCall.stateMutability === "payable") {
+      try {
+        const tx = contract.methods[method](...params);
+        const result = await tx.send({ from: account, value: params[1] });
+        setResult(result);
+      } catch (error) {
+        console.error(error);
+      }
+      return;
+    }
 
+    console.log(functionToCall);
     try {
       const tx = contract.methods[method](...params);
       const result = await tx.send({ from: account });
@@ -173,7 +184,7 @@ const ContractRunner: FC<ContractRunnerProps> = ({
         {result && (
           <div className="mt-4">
             <h3 className="text-lg font-medium mb-2">Resultado</h3>
-            <pre className="bg-gray-100 p-4 rounded-md">
+            <pre className="bg-gray-100 p-4 rounded-md overflow-x-auto whitespace-pre max-w-full">
               {typeof result === "object"
                 ? JSON.stringify(formatResult(result), null, 2)
                 : result}
