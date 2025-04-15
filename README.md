@@ -23,6 +23,7 @@ Esta aplicación permite a los desarrolladores interactuar con contratos intelig
 ## Instalación
 
 1. Clona este repositorio:
+
    ```bash
    git clone https://github.com/tu-usuario/react_contract_tester_local.git
    cd react_contract_tester_local
