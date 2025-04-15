@@ -9,14 +9,6 @@ export interface CustomContract {
 export interface ContractStore {
   account: string | null;
 
-  contract: CustomContract | null;
-  loading: boolean;
-  error: string | null;
-
   addAccount: (account: string) => void;
-  initLoading: () => void;
-  addContract: (contract: any) => void;
-  setError: (error: string) => void;
-
-  removeContract: () => void;
+  removeAccount: () => void;
 }
