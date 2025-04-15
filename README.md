@@ -14,6 +14,16 @@ Esta aplicación permite a los desarrolladores interactuar con contratos intelig
 - Formularios manejados con React Hook Form
 - Desarrollo con TypeScript para mayor seguridad de tipos
 
+## Screenshots
+
+Vista de carga de contratos
+
+![Pantalla de inicio](./docs/home.png)
+
+Vista detalle de contrato
+
+![Pantalla de contrato](./docs/contract.png)
+
 ## Requisitos previos
 
 - Node.js (versión 18 o superior)
